@@ -10,6 +10,7 @@
         shell: /sbin/nologin
         system: true
         create_home: true
+      ignore_errors: true
 
     - name: Create Minio directories
       ansible.builtin.file:
@@ -25,6 +26,7 @@
         - /home/minio-user/.minio
         - /home/minio-user/.minio/certs
         - /home/minio-user/.minio/CAs
+      ignore_errors: true
 
     - name: Copy Minio binary
       ansible.builtin.copy:
