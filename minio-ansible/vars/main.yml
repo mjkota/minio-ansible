@@ -3,7 +3,7 @@
 # Conditional runtime variables
 minio_user: "minio-user"
 minio_group: "minio-user"
-enable_certificates: false
+enable_certificates: true
 
 
 # MinIO evnironment variables
