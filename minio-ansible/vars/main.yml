@@ -1,0 +1,7 @@
+---
+# vars file for minio-ansible
+
+#
+minio_access_key: "your_access_key"
+minio_secret_key: "your_secret_key"
+ 

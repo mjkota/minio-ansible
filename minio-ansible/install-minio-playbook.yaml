@@ -1,0 +1,58 @@
+---
+- name: Install Minio
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create Minio user
+      ansible.builtin.user:
+        name: minio
+        shell: /sbin/nologin
+        system: yes
+        create_home: no
+
+    - name: Create Minio directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: minio
+        group: minio
+        mode: '0755'
+      with_items:
+        - /usr/local/bin
+        - /etc/minio
+        - /var/minio
+
+    - name: Copy Minio binary
+      ansible.builtin.copy:
+        src: files/minio
+        dest: /usr/local/bin/minio
+        owner: minio
+        group: minio
+        mode: '0755'
+
+    - name: Copy Minio service file
+      ansible.builtin.copy:
+        src: files/minio.service
+        dest: /etc/systemd/system/minio.service
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Copy Minio default environment file
+      ansible.builtin.template:
+        src: templates/minio.default.j2
+        dest: /etc/default/minio
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Reload systemd daemon
+      ansible.builtin.systemd:
+        daemon_reload: yes
+
+    - name: Enable and start Minio service
+      ansible.builtin.systemd:
+        name: minio
+        enabled: yes
+        state: started
+
