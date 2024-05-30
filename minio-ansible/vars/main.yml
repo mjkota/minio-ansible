@@ -1,7 +1,11 @@
 ---
 # vars file for minio-ansible
 
-#
-minio_access_key: "your_access_key"
-minio_secret_key: "your_secret_key"
- 
+# MinIO evnironment variables
+# MinIO root user and password "super user access key and secret key" 
+minio_volumes: "https://minio-0{1...4}.theverse.home:9000/mnt/disk{1...4}/minio"
+minio_opts: "--console-address :9001"
+minio_root_user: "adminio"
+minio_root_password: "adminio123"
+minio_server_url: "https://minio-01.theverse.home:9000"
+minio_ec:""
