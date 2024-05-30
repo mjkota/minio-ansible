@@ -2,6 +2,7 @@
 - name: Install Minio Server
   hosts: all
   become: yes
+  serial: {{ forks }}
   tasks:
     - name: Create Minio user
       ansible.builtin.user:
