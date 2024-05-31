@@ -74,7 +74,7 @@
     - name: Copy Minio default environment file
       ansible.builtin.template:
         src: templates/minio.default.j2
-        dest: /etc/default/minio
+        dest: {{ minio_conf_env_file }}
         owner: root
         group: root
         mode: '0644'
